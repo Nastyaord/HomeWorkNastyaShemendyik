@@ -29,35 +29,31 @@
         }, 10, closure)
     }
 
-
     math = {
-        firstNumber: 4,
-        secondNumber: 10,
-        sumResult: 0,
-        minusResult: 0,
-        multiplayResult: 0,
+        number: 4,
         sum: function () {
-            this.sumResult = this.firstNumber + this.secondNumber
+            this.number++;
             return this;
         },
         minus: function () {
-            this.minusResult = this.firstNumber - this.secondNumber
+            this.number--;
             return this;
         },
         multiplay: function () {
-            this.multiplayResult = this.firstNumber * this.secondNumber
+            this.number = this.number * this.number;
             return this;
         },
         showResult: function () {
-            console.log(this.sumResult, this.minusResult, this.multiplayResult );
+            console.log(this.number);
+            return this;
         }
     };
 
-    math.sum().minus().multiplay().showResult();
+    math.sum().showResult().minus().showResult().multiplay().showResult();
+
 
 
 
 </script>
-
 </body>
 </html>
