@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+    
+
+      function fibonacci() {
+          let firstNumber = 0;
+          let secondNumber = 1;
+          for (let i = 0; i < 10; i++) {
+               let fibonacciNumber = firstNumber + secondNumber;
+               firstNumber = secondNumber;
+               secondNumber = fibonacciNumber;
+               console.log(fibonacciNumber);
+          }
+
+      }
+      fibonacci();
+
+
+    </script>
+</body>
+</html>
