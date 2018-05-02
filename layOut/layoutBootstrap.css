@@ -1,0 +1,87 @@
+body{
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.7rem;
+}
+.col-sm-3{
+    background-color: #2a2730;
+    height: 700px;
+}
+.col-sm-9{
+    background-color: #2a2730;
+    height: auto;
+}
+.navbar{
+    margin: 0px;
+    color: #bbbcc4;
+}
+.img-thumbnail{
+    background-color: #1b1e21;
+}
+.navbar span{
+    margin-left: 30px;
+    font-size: 2.0rem;
+}
+.navbar-nav, .form-inline{
+    margin-left: 130px;
+}
+.btn-group-vertical{
+    width: 70%;
+    height: 130px;
+    padding: 10px;
+}
+.form-group{
+    margin-top: 20px;
+}
+.table-dark{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 230px;
+}
+tr, td{
+    height: 50px;
+    width: 50px;
+    border: 2px solid #d1b3e8;
+}
+#footer{
+    position:fixed;
+    bottom:0;
+    width: 100%;
+    color: #e4b9c0;
+    background-color: #777777;
+    padding-right: 30px;
+}
+
+
+
+
+
+
+
+
+
+/*media quorities*/
+@media (max-width: 768px) {
+   body, .navbar span {
+        font-size: 1rem;
+    }
+    .d-inline-block {
+    display: none !important;
+    }
+    .form-inline{
+        margin-left: 0px;
+    }
+    .form-control{
+        width: 126px;
+    }
+    .form-inline{
+        margin-left: 285px;
+    }
+    #tableBtn, .form-group{
+        display: none;
+    }
+    .btn-group-vertical{
+        width: 70%;
+        font-size: 0.5rem;
+    }
+
+}
