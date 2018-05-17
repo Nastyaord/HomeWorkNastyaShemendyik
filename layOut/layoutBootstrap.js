@@ -95,9 +95,8 @@ function showSizeOfWindow() {
 }
 
 //create carousel
-let timerIdCarousel = setInterval(createCarousel, 3000);
-clearInterval(timerIdCarousel);
-console.log(timerIdCarousel);
+setInterval(createCarousel, 3000);
+
 
 let slide = [
     "first1.jpg",
