@@ -27,7 +27,7 @@ function createOurTable() {
         }
     }
 }
-
+// show number sells
 function showNumberCell(event) {
     var blockWithButtons = document.getElementById("blockWithButtons");
     let numberSells = document.getElementById("numberSells");
@@ -43,8 +43,6 @@ function showNumberCell(event) {
 //create a date in ourlayout
 
 let rowWithTime = document.getElementById("rowWithTime");
-// let footer = document.getElementById("footer");
-
 setInterval(showClock, 1000);
 function showClock() {
     let today = new Date;
@@ -79,7 +77,6 @@ function resetUserTime(event){
     if (event.keyCode == 27) {
         counter = 0;
     }
-
 }
 
 blockWithUserTime.addEventListener("mouseover", stopShowTimeOfUser);
@@ -123,9 +120,9 @@ setTimeout(showSizeOfWindow, 3000);
 
 //create OOP carousel
 var img = [
-    "first1.jpg",
-    "second2.jpg",
-    "third3.jpg"
+    "img/first1.jpg",
+    "img/second2.jpg",
+    "img/third3.jpg"
 ];
 
 let createCarouselBtn = document.getElementById("createCarousel");
