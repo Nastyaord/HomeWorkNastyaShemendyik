@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="promisesSecond.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+</head>
+<body>
+<div class="wrapPreloder">
+
+
+    <div id="preloader">
+
+    </div>
+
+    <span id="counterPreloader">100</span>
+</div>
+<div class="wrapWithBlocks">
+
+
+    <div class="container" id="firstContainer">
+        <img src="promisesSecond1.jpg" alt="">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius erat quis lacinia accumsan. Nam ante quam, convallis sodales ante nec, blandit vulputate risus. Donec diam dolor, ultrices nec nisl at, accumsan iaculis mauris. Vestibulum condimentum erat vel ipsum dapibus consequat. Morbi quis libero nec ante porttitor luctus nec sit amet metus. Nunc in dictum erat. Donec nec ullamcorper arcu. Nullam a turpis et arcu cursus ornare. Vestibulum at tortor ante. Suspendisse pulvinar erat enim. Quisque scelerisque magna vel risus fringilla porttitor. Morbi nulla risus, porttitor vel blandit sed, pretium in quam.</p>
+
+    </div>
+    <div class="container">
+        <img src="promisesSecond12.jpeg" alt="">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius erat quis lacinia accumsan. Nam ante quam, convallis sodales ante nec, blandit vulputate risus. Donec diam dolor, ultrices nec nisl at, accumsan iaculis mauris. Vestibulum condimentum erat vel ipsum dapibus consequat. Morbi quis libero nec ante porttitor luctus nec sit amet metus. Nunc in dictum erat. Donec nec ullamcorper arcu. Nullam a turpis et arcu cursus ornare. Vestibulum at tortor ante. Suspendisse pulvinar erat enim. Quisque scelerisque magna vel risus fringilla porttitor. Morbi nulla risus, porttitor vel blandit sed, pretium in quam.</p>
+    </div>
+    <div class="container">
+        <img src="promisesSecond3.jpg" alt="">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius erat quis lacinia accumsan. Nam ante quam, convallis sodales ante nec, blandit vulputate risus. Donec diam dolor, ultrices nec nisl at, accumsan iaculis mauris. Vestibulum condimentum erat vel ipsum dapibus consequat. Morbi quis libero nec ante porttitor luctus nec sit amet metus. Nunc in dictum erat. Donec nec ullamcorper arcu. Nullam a turpis et arcu cursus ornare. Vestibulum at tortor ante. Suspendisse pulvinar erat enim. Quisque scelerisque magna vel risus fringilla porttitor. Morbi nulla risus, porttitor vel blandit sed, pretium in quam.</p>
+    </div>
+</div>
+
+
+<script>
+    let pendingPreloader = new Promise(
+        (resolve, reject) => {
+            let preloader = document.getElementById("preloader");
+            preloader.addEventListener("mouseover", function () {
+                    let counterPreloader = document.getElementById("counterPreloader");
+                    let preloader = document.getElementById("preloader");
+                    counter = 100;
+                    let timerPreloder =  setInterval(()=>{
+                        counterPreloader.innerText = --counter;
+                        if (counter === 0) {
+                            clearInterval(timerPreloder);
+                        }
+                    }, 0,5);
+                    preloader.addEventListener("transitionend", function () {
+                        resolve();
+                        reject();
+
+                    });
+                }
+            );
+        });
+
+    function clearFirstContainer(){
+        let firstContainer = document.getElementById("firstContainer");
+        let firstPicture = document.querySelectorAll("#firstContainer img");
+        let firstText = document.querySelectorAll("#firstContainer p");
+        // console.log(firstText);
+        firstText.style.display = "none";
+    }
+
+
+
+
+
+    pendingPreloader.then(clearFirstContainer);
+                    // .then(clearSecondContainer)
+                    // .then(clearThirdContainer);
+
+
+
+
+</script>
+
+</body>
+</html>

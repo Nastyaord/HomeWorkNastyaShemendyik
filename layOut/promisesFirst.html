@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="promises.css">
+    <title></title>
+      <link rel="stylesheet" href="promisesFirst.css">
+  </head>
+  <body>
+    <div class="wrapPreloder">
+
+
+      <div id="preloader">
+
+      </div>
+
+      <span id="counterPreloader">100</span>
+    </div>
+<div class="wrapWithBlocks">
+
+
+    <div class="container">
+      <img src="01.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius erat quis lacinia accumsan. Nam ante quam, convallis sodales ante nec, blandit vulputate risus. Donec diam dolor, ultrices nec nisl at, accumsan iaculis mauris. Vestibulum condimentum erat vel ipsum dapibus consequat. Morbi quis libero nec ante porttitor luctus nec sit amet metus. Nunc in dictum erat. Donec nec ullamcorper arcu. Nullam a turpis et arcu cursus ornare. Vestibulum at tortor ante. Suspendisse pulvinar erat enim. Quisque scelerisque magna vel risus fringilla porttitor. Morbi nulla risus, porttitor vel blandit sed, pretium in quam.</p>
+
+    </div>
+    <div class="container">
+      <img src="gorgeous-natural-landscape-view-niagara-falls-river-big-rocks-stones-background-beautiful-amazing-78954554.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius erat quis lacinia accumsan. Nam ante quam, convallis sodales ante nec, blandit vulputate risus. Donec diam dolor, ultrices nec nisl at, accumsan iaculis mauris. Vestibulum condimentum erat vel ipsum dapibus consequat. Morbi quis libero nec ante porttitor luctus nec sit amet metus. Nunc in dictum erat. Donec nec ullamcorper arcu. Nullam a turpis et arcu cursus ornare. Vestibulum at tortor ante. Suspendisse pulvinar erat enim. Quisque scelerisque magna vel risus fringilla porttitor. Morbi nulla risus, porttitor vel blandit sed, pretium in quam.</p>
+    </div>
+    <div class="container">
+      <img src="thumb_ls_1790.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius erat quis lacinia accumsan. Nam ante quam, convallis sodales ante nec, blandit vulputate risus. Donec diam dolor, ultrices nec nisl at, accumsan iaculis mauris. Vestibulum condimentum erat vel ipsum dapibus consequat. Morbi quis libero nec ante porttitor luctus nec sit amet metus. Nunc in dictum erat. Donec nec ullamcorper arcu. Nullam a turpis et arcu cursus ornare. Vestibulum at tortor ante. Suspendisse pulvinar erat enim. Quisque scelerisque magna vel risus fringilla porttitor. Morbi nulla risus, porttitor vel blandit sed, pretium in quam.</p>
+    </div>
+</div>
+
+
+    <script type="text/javascript">
+        let pendingPreloader = new Promise(
+            (resolve, reject) => {
+            let preloader = document.getElementById("preloader");
+            preloader.addEventListener("mouseover", function () {
+                let counterPreloader = document.getElementById("counterPreloader");
+                        let preloader = document.getElementById("preloader");
+                        counter = 100;
+                        let timerPreloder =  setInterval(()=>{
+                            counterPreloader.innerText = --counter;
+                            if (counter === 0) {
+                                clearInterval(timerPreloder);
+                            }
+                        }, 0,5);
+                     preloader.addEventListener("transitionend", function () {
+                     resolve();
+                     reject();
+
+                     });
+                }
+            );
+        });
+        function clearPictures (){
+            let images = document.getElementsByTagName("img");
+                for (let i = 0; i < images.length; i++) {
+                    images[i].style.display = "none";
+                }
+        };
+        function clearText (){
+            let text = document.getElementsByTagName("p");
+
+            setTimeout( function () {
+                for (let i = 0; i < text.length; i++) {
+                    text[i].style.display = "none";
+                }
+
+            }, 1000);
+        };
+
+        function clearContainer (){
+            let containers = document.getElementsByClassName("container");
+                setTimeout( function () {
+                    for (let i = 0; i < containers.length; i++) {
+                    containers[i].style.display = "none";
+                }
+
+            }, 2000);
+
+        };
+
+
+        pendingPreloader.then(clearPictures)
+                        .then(clearText)
+                        .then(clearContainer);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

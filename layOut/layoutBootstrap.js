@@ -28,15 +28,15 @@ function createOurTable() {
     }
 }
 
-
 function showNumberCell(event) {
+    var blockWithButtons = document.getElementById("blockWithButtons");
+    let numberSells = document.getElementById("numberSells");
     let numberColumn = event.target.getAttribute("data");
     let numberRow = event.target.getAttribute("dataSecond");
     let btnResult = document.createElement("button");
     btnResult.className = "btn btn-outline-danger";
-    var blockWithButtons = document.getElementById("blockWithButtons");
-    blockWithButtons.appendChild(btnResult);
-    btnResult.innerHTML = numberColumn + ' * ' + numberRow;
+    var tableBtn = document.getElementById("tableBtn");
+    numberSells.innerHTML = numberColumn + ' * ' + numberRow;
 }
 
 
@@ -59,6 +59,7 @@ function showClock() {
     showTime = `Today: ${year} year, month: ${monthInUkraine}, day: ${dayInUkraine}, time: ${hour}: ${minute}: ${second}`;
     rowWithTime.innerHTML = showTime;
 };
+
 //create time in site
 let blockWithUserTime = document.getElementById("blockWithUserTime");
 let seconds = 0;
@@ -73,6 +74,13 @@ function showTimeOfUser(){
     blockWithUserTime.innerHTML = `Your time on site is ${minute} minutes ${seconds} seconds`;
 }
 
+document.addEventListener("keydown", resetUserTime);
+function resetUserTime(event){
+    if (event.keyCode == 27) {
+        counter = 0;
+    }
+
+}
 
 blockWithUserTime.addEventListener("mouseover", stopShowTimeOfUser);
 function stopShowTimeOfUser(){
@@ -86,38 +94,123 @@ function startTimer() {
 
 
 //show display resolution
-
-function showSizeOfWindow() {
-    let widthOfWindow = window.outerWidth;
-    let heightOfWindow = window.outerHeight;
-    showWindowSize = `Display resolution: ${widthOfWindow} X ${heightOfWindow}`;
-    document.getElementById('displayResolution').innerHTML = showWindowSize;
-}
+setTimeout(showSizeOfWindow, 3000);
+    function showSizeOfWindow() {
+        let widthOfWindow = window.outerWidth;
+        let heightOfWindow = window.outerHeight;
+        showWindowSize = `Display resolution: ${widthOfWindow} X ${heightOfWindow}`;
+        document.getElementById('displayResolution').innerHTML = showWindowSize;
+    }
 
 //create carousel
-setInterval(createCarousel, 3000);
+// setInterval(createCarousel, 1000);
+// let slide = [
+//     "first1.jpg",
+//     "second2.jpg",
+//     "third3.jpg"
+// ];
+// var counterSlide = 0;
+// function createCarousel(){
+// let blockWithCarousel = document.getElementById("blockWithCarousel");
+//     let currentSlide = counter++ % slide.length;
+//     let image = new Image(900, 500);
+//     image.className = "img-thumbnail";
+//     image.src = slide[currentSlide];
+//     blockWithCarousel.innerHTML = "";
+//     blockWithCarousel.appendChild(image);
+// }
 
 
-let slide = [
+//create OOP carousel
+var img = [
     "first1.jpg",
     "second2.jpg",
     "third3.jpg"
 ];
-var counterSlide = 0;
-function createCarousel(){
-let blockWithCarousel = document.getElementById("blockWithCarousel");
-    let currentSlide = counter++ % slide.length;
-    let image = new Image(900, 500);
-    image.className = "img-thumbnail";
-    image.src = slide[currentSlide];
-    blockWithCarousel.innerHTML = "";
-    blockWithCarousel.appendChild(image);
+
+let createCarouselBtn = document.getElementById("createCarousel");
+createCarouselBtn.addEventListener("click", function () {
+   let carusel = new Carousel(img, blockWithCarouselFirst);
+   carusel.createCarousel();
+});
+let carouseselWithArrows;
+let createCarouselWithArrowsBtn = document.getElementById("createCarouselWithArrows");
+createCarouselWithArrowsBtn.addEventListener("click", function () {
+    carouseselWithArrows = new CarouseselWithArrows(img, blockWithCarouselFirst);
+});
+
+class Carousel {
+    constructor (img, block) {
+        this.img = img;
+        this.block = block;
+        this.currentSlide = 0;
+        this.showImage();
+    }
+
+    createCarousel(){
+       setInterval(function (that) {
+            that.setCorrectSlide('+');
+            that.showImage();
+        }, 1000, this);
+    }
+
+    setCorrectSlide(action){
+
+        if(action == '+') {
+            if (this.currentSlide < this.img.length - 1) {
+                this.currentSlide++;
+            } else {
+                this.currentSlide = 0;
+            }
+        } else {
+            if (this.currentSlide == 0) {
+                this.currentSlide = this.img.length - 1;
+            } else {
+                this.currentSlide--;
+            }
+        }
+    }
+
+    showImage(){
+        let image = new Image(900, 500);
+        image.className = "img-thumbnail";
+        image.src = this.img[this.currentSlide];
+        this.block.innerHTML = "";
+        this.block.appendChild(image);
+    }
 }
 
+class CarouseselWithArrows extends Carousel{
+    constructor (img, block){
+        super(img, block);
+        this.createArrow();
+    }
 
-//create carousel second
+    createArrow(){
+        let leftArrow = document.getElementById("left");
+        let rightArrow = document.getElementById("right");
+        let arrowILeft = document.createElement("i");
+        let arrowIRight = document.createElement("i");
+        arrowILeft.classList.add("fas", "fa-angle-left");
+        arrowIRight.classList.add("fas", "fa-angle-right");
+        left.appendChild(arrowILeft);
+        right.appendChild(arrowIRight);
+        arrowILeft.addEventListener("click", this.leftClick);
+        arrowIRight.addEventListener("click", this.rightClick);
+    }
 
+    leftClick(){
+        let that = carouseselWithArrows;
+        that.setCorrectSlide('-');
+        that.showImage();
+    }
 
+    rightClick() {
+        let that = carouseselWithArrows;
+        that.setCorrectSlide('+');
+        that.showImage();
+    }
+}
 
 
 
