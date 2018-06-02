@@ -1,7 +1,6 @@
 //create a table in ourlayout
 
-let tableBtn = document.getElementById("tableBtn");
-let mainContant = document.getElementById("mainContant");
+
 tableBtn.addEventListener('click', createOurTable);
 
 function createOurTable() {
@@ -87,7 +86,6 @@ blockWithUserTime.addEventListener("mouseout", startTimer);
 function startTimer() {
     timerId = setInterval(showTimeOfUser, 1000);
 }
-
 
 
 //show display resolution
