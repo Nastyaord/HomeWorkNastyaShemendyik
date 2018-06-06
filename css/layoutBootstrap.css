@@ -77,7 +77,18 @@ tr, td{
     text-decoration: deepskyblue;
     color: aqua;
 }
-
+#locationField input{
+    background-color: #2a2730;
+    color: aqua;
+    border: 1px solid aqua;
+}
+.pac-container{
+    background-color: #2a2730;
+}
+.pac-item:hover{
+    background-color: #abe8d9;
+    color: #2a2730;
+}
 
 
 /*media quorities*/

@@ -97,24 +97,6 @@ setTimeout(showSizeOfWindow, 3000);
         document.getElementById('displayResolution').innerHTML = showWindowSize;
     }
 
-//create carousel
-// setInterval(createCarousel, 1000);
-// let slide = [
-//     "first1.jpg",
-//     "second2.jpg",
-//     "third3.jpg"
-// ];
-// var counterSlide = 0;
-// function createCarousel(){
-// let blockWithCarousel = document.getElementById("blockWithCarousel");
-//     let currentSlide = counter++ % slide.length;
-//     let image = new Image(900, 500);
-//     image.className = "img-thumbnail";
-//     image.src = slide[currentSlide];
-//     blockWithCarousel.innerHTML = "";
-//     blockWithCarousel.appendChild(image);
-// }
-
 
 //create OOP carousel
 var img = [
@@ -128,10 +110,16 @@ createCarouselBtn.addEventListener("click", function () {
    let carusel = new Carousel(img, blockWithCarouselFirst);
    carusel.createCarousel();
 });
+
 let carouseselWithArrows;
 let createCarouselWithArrowsBtn = document.getElementById("createCarouselWithArrows");
 createCarouselWithArrowsBtn.addEventListener("click", function () {
     carouseselWithArrows = new CarouseselWithArrows(img, blockWithCarouselFirst);
+});
+
+let carouselWithHover;
+createCarouselWithHover.addEventListener('click', function () {
+    carouselWithHover = new CarouselWithHover(img, blockWithCarouselFirst);
 });
 
 class Carousel {
@@ -139,14 +127,17 @@ class Carousel {
         this.img = img;
         this.block = block;
         this.currentSlide = 0;
+        this.intervalIdCarousel = false;
         this.showImage();
     }
 
     createCarousel(){
-       setInterval(function (that) {
-            that.setCorrectSlide('+');
-            that.showImage();
-        }, 1000, this);
+       this.intervalIdCarousel = setInterval(this.intervalCallback.bind(this), 1000);
+    }
+
+    intervalCallback () {
+        this.setCorrectSlide('+');
+        this.showImage();
     }
 
     setCorrectSlide(action){
@@ -190,23 +181,72 @@ class CarouseselWithArrows extends Carousel{
         arrowIRight.classList.add("fas", "fa-angle-right");
         left.appendChild(arrowILeft);
         right.appendChild(arrowIRight);
-        arrowILeft.addEventListener("click", this.leftClick);
-        arrowIRight.addEventListener("click", this.rightClick);
+        arrowILeft.addEventListener("click", this.leftClick.bind(this));
+        arrowIRight.addEventListener("click", this.rightClick.bind(this));
+
     }
 
     leftClick(){
-        let that = carouseselWithArrows;
-        that.setCorrectSlide('-');
-        that.showImage();
+        this.setCorrectSlide('-');
+        this.showImage();
     }
 
     rightClick() {
-        let that = carouseselWithArrows;
-        that.setCorrectSlide('+');
-        that.showImage();
+        this.setCorrectSlide('+');
+        this.showImage();
     }
 }
 
+class CarouselWithHover extends Carousel{
+    constructor (img, block){
+        super(img, block);
+        this.createCarousel();
+        this.block.addEventListener('mouseover', this.stopSlider.bind(this));
+        this.block.addEventListener('mouseout', this.createCarousel.bind(this));
+    }
+
+    stopSlider(){
+        clearInterval(this.intervalIdCarousel);
+    }
+}
+
+
+
+//create autocomlete
+
+
+function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById('autocomplete')),
+        {types: ['(cities)'],language:'en'}
+    );
+    autocomplete.addListener('place_changed', function () {
+        counter = 0;
+        let place = autocomplete.getPlace();
+        localStorage.setItem(counter++, place.name);
+        console.log(place.name);
+        showWheather(place.name);
+    });
+
+    function showWheather(sity) {
+            $.ajax({
+                type: 'GET',
+                url: 'api.worldweatheronline.com/premium/v1/weather.ashx?key=0eee58c1fd354a538fd121743180506&q='
+                + sity
+                + ',Ukraine&format=json',
+                async: false,
+                contentType: "application/json",
+                jsonCallback: callback,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+                },
+                error: function (e) {
+                    console.log(e.message);
+                }
+            });
+    }
+}
 
 
 

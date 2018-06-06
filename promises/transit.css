@@ -1,0 +1,12 @@
+body{
+    background-color: #627577;
+}
+#preloader{
+    height: 30px;
+    width: 100px;
+    background-color: #e4b9c0;
+    transition: width 5s;
+}
+#preloader:hover{
+    width: 100%;
+}

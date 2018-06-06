@@ -35,23 +35,20 @@
                 (resolve, reject) => {
                 let preloader = document.getElementById("preloader");
                 preloader.addEventListener("mouseover", function () {
-                    if(counter != 100) {
-                        return false;
-                    }
                     let counterPreloader = document.getElementById("counterPreloader");
                             let preloader = document.getElementById("preloader");
                             let timerPreloder =  setInterval(()=>{
                                 counterPreloader.innerText = --counter;
-                                if (0 == counter) {
+                                console.log(counter);
+                                if (counter == 0) {
                                     clearInterval(timerPreloder);
                                 }
                             }, 0,5);
                          preloader.addEventListener("transitionend", function () {
-                         resolve();
-                         reject();
-                         });
-                    }
-                );
+                            resolve();
+                           // reject();
+                         }, {once:true});
+                    }, {once:true});
             });
             function clearPictures (){
                 let images = document.getElementsByTagName("img");
