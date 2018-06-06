@@ -218,34 +218,35 @@ class CarouselWithHover extends Carousel{
 function initAutocomplete() {
     autocomplete = new google.maps.places.Autocomplete(
         (document.getElementById('autocomplete')),
-        {types: ['(cities)'],language:'en'}
+        {types: ['(cities)'], language: 'en'}
     );
     autocomplete.addListener('place_changed', function () {
         counter = 0;
         let place = autocomplete.getPlace();
         localStorage.setItem(counter++, place.name);
-        console.log(place.name);
         showWheather(place.name);
     });
 
     function showWheather(sity) {
-            $.ajax({
-                type: 'GET',
-                url: 'api.worldweatheronline.com/premium/v1/weather.ashx?key=0eee58c1fd354a538fd121743180506&q='
-                + sity
-                + ',Ukraine&format=json',
-                async: false,
-                contentType: "application/json",
-                jsonCallback: callback,
-                dataType: 'json',
-                success: function (json) {
-                    console.log(json);
-                },
-                error: function (e) {
-                    console.log(e.message);
-                }
-            });
+        $.ajax({
+            type: 'GET',
+            url: 'http://api.worldweatheronline.com/premium/v1/weather.ashx',
+            data: {key:'0eee58c1fd354a538fd121743180506',
+                q:sity  + ',Ukraine',
+                format:'json'},
+            success: function (data) {
+                data = data.data;
+                let sity = data.request[0].query;
+                let temperature = data.current_condition[0].temp_C;
+                let icon = data.current_condition[0].weatherIconUrl[0].value;
+                console.log(sity, temperature, icon);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
     }
+
 }
 
 
