@@ -232,13 +232,19 @@ function initAutocomplete() {
             type: 'GET',
             url: 'http://api.worldweatheronline.com/premium/v1/weather.ashx',
             data: {key:'0eee58c1fd354a538fd121743180506',
-                q:sity  + ',Ukraine',
+                q:sity,
                 format:'json'},
             success: function (data) {
                 data = data.data;
                 let sity = data.request[0].query;
                 let temperature = data.current_condition[0].temp_C;
                 let icon = data.current_condition[0].weatherIconUrl[0].value;
+                sityName.innerText = `${sity} ,`;
+                temperatureWeather.innerText = `${temperature}  degrees`;
+                let imgWeather = new Image();
+                imgWeather.className = "img-thumbnail";
+                imgWeather.src = icon;
+                pictureWeather.appendChild(imgWeather);
                 console.log(sity, temperature, icon);
             },
             error: function (e) {

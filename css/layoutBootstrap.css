@@ -89,6 +89,15 @@ tr, td{
     background-color: #abe8d9;
     color: #2a2730;
 }
+#weather{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    color: #abe8d9;
+}
+#weather div{
+    margin-right: 10px;
+}
 
 
 /*media quorities*/
