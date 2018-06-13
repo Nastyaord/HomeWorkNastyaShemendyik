@@ -222,8 +222,8 @@ function initAutocomplete() {
     );
     autocomplete.addListener('place_changed', function () {
         counter = 0;
-        let place = autocomplete.getPlace();
-        localStorage.setItem(counter++, place.name);
+        var place = autocomplete.getPlace();
+        localStorage.setItem(counter, place.name);
         showWheather(place.name);
     });
 
@@ -239,21 +239,103 @@ function initAutocomplete() {
                 let sity = data.request[0].query;
                 let temperature = data.current_condition[0].temp_C;
                 let icon = data.current_condition[0].weatherIconUrl[0].value;
+
                 sityName.innerText = `${sity} ,`;
                 temperatureWeather.innerText = `${temperature}  degrees`;
                 let imgWeather = new Image();
                 imgWeather.className = "img-thumbnail";
                 imgWeather.src = icon;
                 pictureWeather.appendChild(imgWeather);
-                console.log(sity, temperature, icon);
             },
             error: function (e) {
-                console.log(e);
             }
         });
     }
-
 }
+
+//create jquery table
+
+$.noConflict();
+let allStudents = [];
+// let students = [];
+jQuery( document ).ready(function ($) {
+
+    $('#jqueryTable').click(function () {
+        $('#blockWithCarouselFirst').append('<div></div>');
+        $('#blockWithCarouselFirst > div').addClass('form-group');
+
+        for (let i = 0; i < 7; i++) {
+            $('#blockWithCarouselFirst > div').append('<input class="form-control fieldsOfStudents"></input>');
+            //    $('#blockWithCarouselFirst .form-group > input').addClass('form-control fieldsOfStudents');
+        }
+        ;
+
+        $('.fieldsOfStudents:eq(0)').attr({'placeholder': 'Fill your name', 'name': 'name'});
+        $('.fieldsOfStudents:eq(1)').attr({'placeholder': 'Fill your secondname', 'name': 'secondname'});
+        $('.fieldsOfStudents:eq(2)').attr({'placeholder': 'Fill your age', 'name': 'age'});
+        $('.fieldsOfStudents:eq(3)').attr({'placeholder': 'Fill your faculty', 'name': 'faculty'});
+        $('.fieldsOfStudents:eq(4)').attr({'placeholder': 'Fill your course', 'name': 'course'});
+        $('.fieldsOfStudents:eq(5)').attr({'placeholder': 'Fill any site', 'name': 'site'});
+        $('.fieldsOfStudents:eq(6)').attr({
+            'placeholder': 'Fill your phone',
+            'id': 'phone',
+            'name': 'phone'
+        }).addClass("phone");
+        $("#phone").mask("(380) 99-999-99-99");
+
+        $('#blockWithCarouselFirst').append('<button></button>');
+        $('#blockWithCarouselFirst > button').addClass('btn btn-outline-info')
+            .attr('id', 'addStudent')
+            .text('Add student');
+        $('#addStudent').on('click', addStudent);
+
+
+        $('<table>', {
+            class: 'tableWithStudent'
+        }).appendTo('#blockWithCarouselFirst');
+
+    });
+
+    function addStudent() {
+        let students = [];
+        $('.fieldsOfStudents').each(function (i, elem) {
+            students.push($(this).val());
+        });
+        allStudents.unshift(students);
+
+        drawTable();
+
+        let counter = 0;
+        localStorage.setItem(counter++, JSON.stringify(allStudents));
+
+    }
+
+
+    function drawTable() {
+        allStudents.forEach(function (value, key) {
+
+            $('<tr>', {
+                class: 'tableRow'
+            }).prependTo('.tableWithStudent');
+            $('<td>')
+                .text(key)
+                .appendTo('.tableWithStudent .tableRow:first-child');
+
+            $('.fieldsOfStudents').each(function (index, elem) {
+                $('<td>', {
+                    name: $(this).attr('name')
+                }).text($(this).val())
+                    .appendTo('.tableWithStudent .tableRow:first-child');
+                console.log(allStudents);
+            });
+
+        });
+
+
+    };
+
+
+});
 
 
 

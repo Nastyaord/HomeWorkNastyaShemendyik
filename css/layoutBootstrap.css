@@ -30,7 +30,6 @@ body{
 }
 .btn-group-vertical{
     width: 70%;
-    height: 130px;
     padding: 10px;
 }
 .form-group{
@@ -75,7 +74,7 @@ tr, td{
 }
 .promises a{
     text-decoration: deepskyblue;
-    color: aqua;
+    color: #17a2b8;
 }
 #locationField input{
     background-color: #2a2730;
@@ -90,15 +89,25 @@ tr, td{
     color: #2a2730;
 }
 #weather{
-    display: flex;
-    justify-content: center;
     margin-top: 15px;
     color: #abe8d9;
 }
 #weather div{
     margin-right: 10px;
 }
-
+.fieldsOfStudents{
+    margin-top: 10px;
+}
+.tableWithStudent{
+    border: 1px solid #abe8d9;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.tableWithStudent td, tr{
+    height: 30px;
+    width: 120px;
+    border: 1px solid #17a2b8;
+}
 
 /*media quorities*/
 @media (max-width: 768px) {
