@@ -4,7 +4,7 @@ let allStudents = [];
 var isSorted = false;
 
 $(document).ready(function () {
-    new Controller();
+   new Controller();
 });
 
 class Controller {
@@ -22,11 +22,19 @@ class Controller {
     addListeners() {
         $('#addStudent').on('click', this.actionAddStudents.bind(this));
         $('.head').on('click', this.actionSortTable.bind(this));
+        $('.tableWithStudent').on('click', '.pictureEdit', this.actionEditStudent.bind(this));
+        $('.blockWithFields').on('click', '.saveStudent', this.actionSaveStudent.bind(this));
+        $('.blockWithFields').on('click', '.backStudent', this.actionBackSudent.bind(this));
     }
 
     actionAddStudents() {
         this.model.addStudent();
-        this.drawTable();
+        if (this.model.validStudentData) {
+            this.drawTable();
+            this.view.clearFieldsOfStudents();
+        } else {
+            alert('Поля не заполнены');
+        }
     }
 
     actionSortTable() {
@@ -36,6 +44,28 @@ class Controller {
 
     drawTable() {
         this.view.drawTable(this.model.getStudents());
+    }
+
+    actionEditStudent(e) {
+        let studentId = $(e.target).data('id');
+        let student = this.model.getStudent(studentId);
+        this.view.clearBlockWithSaveBack().fillFieldsOfStudents(student, studentId);
+    }
+
+    actionSaveStudent(e) {
+        let studentId = $(e.target).data('id');
+        this.model.saveStudent(studentId);
+        if (this.model.validStudentData) {
+            this.drawTable();
+            this.view.clearBlockWithSaveBack();
+        } else {
+            alert('Поля не заполнены');
+        }
+    }
+
+    actionBackSudent() {
+        this.view.clearBlockWithSaveBack().clearFieldsOfStudents();
+
     }
 }
 
@@ -57,7 +87,7 @@ class View {
             {placeholder: 'Fill your phone', name: 'phone', id: 'phone'},
         ];
         this.block = $('#blockWithCarouselFirst');
-        this.block.append('<div class="form-group"></div>');
+        this.block.append('<div class="form-group blockWithFields"></div>');
         this.blockFields = $('#blockWithCarouselFirst > div');
 
         for (let i = 0; i < this.fieldsData.length; i++) {
@@ -86,6 +116,7 @@ class View {
             'course',
             'site',
             'phone number',
+            'edit'
         ];
 
         for (let i = 0; i < this.nameOFColums.length; i++) {
@@ -99,7 +130,7 @@ class View {
         allStudents.forEach(function (valueStudents, keyStudents) {
             $('<tr>').addClass('tableRow').appendTo('.tableWithStudent');
             $('<td>')
-                .text(keyStudents)
+                .text(keyStudents + 1)
                 .appendTo('.tableWithStudent .tableRow:last-child');
             valueStudents.forEach(function (value, key) {
                 $('<td>', {
@@ -107,9 +138,35 @@ class View {
                 }).text(value)
                     .appendTo('.tableWithStudent .tableRow:last-child');
             });
+
+            $('<i></i>').addClass('far fa-edit pictureEdit').attr('data-id', keyStudents)
+                .appendTo('.tableWithStudent .tableRow:last-child');
+
         });
     }
-}
+
+    clearFieldsOfStudents() {
+        $('.fieldsOfStudents').val('');
+    }
+
+    fillFieldsOfStudents(student, studentId) {
+        let fieldsOfStudents = $('.fieldsOfStudents');
+        for (let i = 0; i < student.length; i++) {
+            fieldsOfStudents.eq(i).val(student[i]);
+        }
+
+        $('<div>').addClass('blockWithSaveBack')
+            .appendTo('.blockWithFields');
+        $('<i>').addClass('far fa-save saveStudent').attr('data-id', studentId)
+            .appendTo('.blockWithSaveBack');
+        $('.blockWithSaveBack').append('<i class="fas fa-undo backStudent"></i>');
+    }
+
+    clearBlockWithSaveBack() {
+        $('.blockWithSaveBack').remove();
+        return this;
+    }
+};
 
 class Model {
     constructor() {
@@ -117,7 +174,7 @@ class Model {
             isSorted: false,
             allStudents: []
         };
-
+        this.validStudentData = true;
         let students = localStorage.getItem('students');
         if (students !== null) {
             this.data = JSON.parse(students);
@@ -129,12 +186,11 @@ class Model {
     }
 
     addStudent() {
-        let students = [];
-        $('.fieldsOfStudents').each(function (i, elem) {
-            students.push($(this).val());
-        });
-        this.data.allStudents.unshift(students);
-        this.saveToStorage();
+        let student = this.getStudentData();
+        if (this.validStudentData) {
+            this.data.allStudents.unshift(student);
+            this.saveToStorage();
+        }
     }
 
     sortTable() {
@@ -155,9 +211,32 @@ class Model {
         this.saveToStorage();
     }
 
-    saveToStorage(){
+    saveToStorage() {
         localStorage.setItem('students', JSON.stringify(this.data))
     }
+
+    getStudent(studentId) {
+        return this.data.allStudents[studentId];
+    }
+
+    saveStudent(studentId) {
+        let student = this.getStudentData();
+        if (this.validStudentData) {
+            this.data.allStudents[studentId] = student;
+            this.saveToStorage();
+        }
+    };
+
+    getStudentData() {
+        let student = [];
+        let that = this;
+        $('.fieldsOfStudents').each(function (i, elem) {
+            if ($(this).val() == "") {
+                that.validStudentData = false;
+            }
+            student.push($(this).val());
+        });
+        return student;
+    }
+
 }
-
-
