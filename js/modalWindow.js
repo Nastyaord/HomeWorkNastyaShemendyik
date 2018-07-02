@@ -13,8 +13,9 @@ var modalWindow = {
             parent.insertBefore(block, obj);
             block.onclick = function () {
                 modalWindow.close();
-            }
+            };
         }
+
         block.style.display = 'inline';
     },
 
@@ -26,7 +27,7 @@ var modalWindow = {
             var obj = parent.firstChild;
             win = document.createElement('div');
             win.id = 'modalwindow';
-            win.style.padding = '0 0 5px 0';
+            win.style.padding = '-1px 0 5px 0';
             parent.insertBefore(win, obj);
         }
         win.style.width = width + 'px';
@@ -35,12 +36,12 @@ var modalWindow = {
 
         win.innerHTML = html; //Добавим нужный HTML-текст в наше диалоговое окно
 
-
         win.style.left = '50%';
         win.style.top = '50%';
 
         win.style.marginTop = -(win.offsetHeight / 2) + 'px';
         win.style.marginLeft = -(width / 2) + 'px';
+        
     },
 
     close: function () {
@@ -51,5 +52,5 @@ var modalWindow = {
     show: function (width, height, html) {
         modalWindow.initBlock();
         modalWindow.createModalWindow(width, height, html);
-    }
+    },
 };

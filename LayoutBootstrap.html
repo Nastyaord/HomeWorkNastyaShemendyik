@@ -24,8 +24,12 @@
         <span>Nastya Shemendyik</span>
     </a>
     <button type="button" class="btn btn-outline-info" onclick="modalWindow.show([700], [300], [
-        `<i></i>
-         <span>Are you sure?</span>`
+        `<div><i class='far fa-times-circle'></i></div>
+         <span id=\'btnAnswer\'>Are you sure?</span>
+         <div class=\'answer\'>
+             <button type=\'button\' class=\'btn btn-outline-info\'>Yes</button>
+             <button type=\'button\' class=\'btn btn-outline-info\'>No</button>
+         </div>`
     ])">
         Open modal window
     </button>
