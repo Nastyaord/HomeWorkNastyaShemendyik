@@ -86,38 +86,35 @@ class StudentsList extends baseBlock{
         this.send(message);
     }
 
+    clearStudentsData(){
+        $(this.block).empty();
+    }
 }
-
 
 class StudentsImages extends baseBlock{
     constructor(block){
         super();
 
         this.block = block;
+        this.clearStudentsData();
     }
 
     showStudentsData(studentId){
-        $(this.block)
-            .text(this.students[studentId]);
+        let nameOFColums = [
+            'secondname',
+            'name',
+            'age',
+            'faculty',
+            'course',
+            'site',
+            'phone number',
+        ];
+        let block = this.block;
+        this.students[studentId].forEach(function (elem, key) {
+            $(block).append(`<div> ${nameOFColums[key]} : ${elem}</div>`);
+        });
     }
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 var Mediator = function() {
@@ -136,7 +133,6 @@ var Mediator = function() {
                 }
             }
         }
-
     };
 };
 
@@ -146,14 +142,9 @@ let mediator = new Mediator();
 let topStudentsList =  new StudentsList('#topStudentsList');
 let rightStudentsList =  new StudentsList('#rightStudentsList');
 
-let studentsImage = new StudentsImages('#studentsImage');
+let studentsImage = new StudentsImages('#studentsData');
 
 mediator.register(topStudentsList);
 mediator.register(rightStudentsList);
 
 mediator.register(studentsImage);
-
-
-function log(a) {
-    console.log(a);
-}

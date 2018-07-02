@@ -4,13 +4,18 @@ body{
 }
 #sideBar{
     background-color: #2a2730;
-    height: 100vh;
 }
 .col-sm-8{
     background-color: #2a2730;
-    height: 100vh;
     color: aqua;
     font-size: 1rem;
+}
+#mainContent{
+    height: 100vh;
+    background-color: #2a2730;
+}
+#mainContant{
+    margin-bottom: 60px;
 }
 .navbar {
     margin: 0px;
@@ -38,31 +43,36 @@ body{
 .table-dark{
     margin-top: 50px;
     margin-bottom: 40px;
-    margin-left: 230px;
 }
 tr, td{
     height: 50px;
     width: 50px;
     border: 2px solid #d1b3e8;
 }
+.tableWithStudent{
+    font-family: 'Markazi Text', serif;
+}
+.pictureEdit{
+    margin-top: 30px;
+}
 #rowWithTime{
     width: 100%;
     height: 5%;
 }
 #footer{
+    display: flex;
+    justify-content: flex-end;
     position:fixed;
     bottom:0;
     width: 100%;
     color: #e4b9c0;
     background-color: #777777;
-    padding-right: 30px;
 }
 .col-7, .col-5{
     width: 100%;
     height: 60px;
 }
 #blockWithCarouselFirst{
-    height: 500px;
     width: 100%;
 }
 .fas, .saveStudent{
@@ -72,9 +82,15 @@ tr, td{
     display:  flex;
     justify-content:  space-between;
 }
-.promises a{
-    text-decoration: deepskyblue;
+.promises a:hover, #mediator a:hover{
+    text-decoration: none;
+    color: white;
+}
+.promises a, #mediator a{
     color: #17a2b8;
+}
+#locationField {
+    margin-bottom: 50px;
 }
 #locationField input{
     background-color: #2a2730;
@@ -89,7 +105,8 @@ tr, td{
     color: #2a2730;
 }
 #weather{
-    margin-top: 15px;
+    margin-bottom: 60px;
+    margin-top: 10px;
     color: #abe8d9;
 }
 #weather div{
@@ -123,14 +140,32 @@ tr, td{
     .form-control{
         width: 126px;
     }
-    .form-inline{
-        margin-left: 285px;
-    }
     #tableBtn, .form-group{
         display: none;
     }
     .btn-group-vertical{
         width: 70%;
         font-size: 0.5rem;
+    }
+    .form-inline, #numberSells{
+        display: none;
+    }
+    .mainContent {
+        height: 100vh;
+    }
+    .btn-group-vertical {
+        width: 100%;
+    }
+    #blockWithCarouselFirst{
+        height: auto;
+    }
+    #locationField{
+        margin-bottom: 0px;
+    }
+
+}
+@media (max-width: 768px) {
+    .row {
+
     }
 }
