@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="promises/promisesFirst.html">
     <link rel="stylesheet" href="css/layoutBootstrap.css">
+    <link rel="stylesheet" href="css/modalWindow.css">
 
     <title>My layot</title>
 
@@ -22,6 +23,12 @@
              class="d-inline-block align-center img-fluid img-thumbnail" alt="">
         <span>Nastya Shemendyik</span>
     </a>
+    <button type="button" class="btn btn-outline-info" onclick="modalWindow.show([700], [300], [
+        `<i></i>
+         <span>Are you sure?</span>`
+    ])">
+        Open modal window
+    </button>
     <form action="" class="form-inline">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-outline-info" type="submit">Search</button>
@@ -96,6 +103,7 @@
 <script src="js/layoutBootstrap.js"></script>
 <script src="js/MVCStudents.js"></script>
 <script src="js/createOOPCarousel.js"></script>
+<script src="js/modalWindow.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZN2PvniOxs9Ic-NzztneGo1kybgNmPQw&libraries=places&language=en&callback=initAutocomplete" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
