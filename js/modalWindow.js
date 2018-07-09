@@ -41,7 +41,7 @@ var modalWindow = {
 
         win.style.marginTop = -(win.offsetHeight / 2) + 'px';
         win.style.marginLeft = -(width / 2) + 'px';
-        
+
     },
 
     close: function () {
